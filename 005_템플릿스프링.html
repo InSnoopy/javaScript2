@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script>
+    // es6 버전 이상에는 더 이상 문자열 더하기를 +를 쓰지 않는다.
+
+    // + ( 문자열, 산술 ) -> 문자열 더하기가 우선
+    // -,*,/는 문자열 연산에 없음, 오직 산술 연산만 있다. 그래서 숫자로 자동변환된다.
+    // 그래도 문자열을 +가 아닌 다른 기호로 연산을 하려면 (NaN)로 뜬다.
+
+    // console.log("337" + 272); // 337272
+    // console.log("337" - 272); // 65 // 문자열 빼기는 없기 때문에 그 다음에 산술로 계산된다.
+    // console.log("준일" - 272); // NaN (Not a Number)
+
+    // let string = "337"; // 숫자 타입을 변경해보세요. !!
+    // console.log(typeof(string)); // string
+    // string = string - 0; 
+    // console.log(typeof(string)); // number
+    
+
+
+    let aaa = "메롱";
+    let bbb = ["kgb","fbi"];
+    // 1. +로 문자열 합치는 방법
+    // aaa = aaa + " " + "메롱바"; 
+    // 2. `으로 문자열 합치는 방법
+    aaa = `${aaa} 메롱바 ${bbb[1]}`; // JSP, Spring에서 사용하지 않을 경우
+    // aaa = `\${aaa} 메롱바 \${bbb[1]}`; // JSP에서 사용할 경우 꼭 \$로 사용한다. -> .jsp는 톰캣이 먼저 Java파일이 읽기 때문에 값이 없다면 없애버리기 때문..
+    console.log(aaa);
+
+    // 2번 방법에 문제가 1개 존재한다.
+    // Spring ( EL ) 문법과 정확히 일치. JSP안에 들어가게 되면 Java가 먼저 해석하고 브라우저에 전달해서 화면이 나온다.
+    // Java는 aaa에 선언한 적이 없다면 aaa에 아무것도 안들어간다. Java가 먼저 해석하지 못하게 앞에 \를 붙인다.
+    // 적극적으로 `을 활용해서 템플릿 문자열을 사용하자.
+</script>

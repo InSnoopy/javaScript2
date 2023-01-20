@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script>
+    
+    //////////////////////////////////////// 팀원 메소드를 만드는 팁?
+    // 팀이름.팀장이름.팀원이름 = function 함수(){} 
+    // 이렇게 규칙을 만들어 놓는 경우도 있다.
+    // 프로젝트 진행시, 변수명, 메소드명 등 규칙등을 간단히 정하고 시작!
+    // 보통 접두어를 잘 정해 놓으면 큰 쿤제는 안 생긴다.
+
+    // java의 ArrayList 만들어보기 (사실 스크립트의 배열과 거의 같다.)
+    // class
+
+    // 직접 지원하는 name space(패키지 개념)가 없는 관계로 빈 객체를 활용
+    const java = {};
+    java.util = {};
+    java.util.ArrayList = function ArrayList(){
+        this.length = 0;
+        return this; // 괜히 써 줌
+    }
+
+
+    // add 메소드
+    java.util.ArrayList.prototype.add = function(p_arg){
+        this[this.length] = p_arg; // []안에는 배열이 아니다. 배열식 접근법이다. [속성명 객체]이다.
+        this.length++; // 이렇게 증가 시켜줘야 한다.
+        return this; // 이걸 써줘야지 메소드 체인 사용 가능
+    }
+
+    java.util.ArrayList.prototype.get = function(p_index){
+        return this[p_index];
+        // return this : 보통 읽기 메소드에는메소드 체이닝 구현하지 않는다. 왜? 값을 원하니깐..
+    }
+
+    java.util.ArrayList.prototype.remove = function(p_index){
+        for(let i=p_index; i<this.length; i++){
+            this[i] = this[i+1]; // 왼쪽으로 덮어쓰기
+        }
+
+        console.log("디버깅1 : ",this);
+        delete this[this.length-1];
+        this.length--; // 1개 지웠으니, 갯수 줄여야 한다.
+        console.log("디버깅2 : ",this);
+        return this;
+    }
+
+    let myArrList = new java.util.ArrayList();
+    myArrList.add("박인수").add("송지은").add("윤호연").remove(1).add("전혜수"); // 이렇게 체인으로 연결하는게 좋다. 단) 메소드에 return this가 있어야한다.
+                                                                               // 읽는 get()메소드 같은건 메소드 체인이 안된다. 
+    // myArrList.add("전혜수");
+    // myArrList.add("이수현");
+
+    // console.log(myArrList);
+    // console.log(myArrList.get(1));
+    
+    // myArrList.remove(1);
+    // console.log(myArrList.get(1));
+
+
+
+</script>

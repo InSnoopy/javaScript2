@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script>
+
+// 함수의 매개변수는 어떤 것이 와도 된다.
+// 함수 안에 return도 어떤 타입 와도 상관이 없다.
+// 함수 연습 필수
+
+const f_ret=function(){
+    // return ["b","t","s"]; // return을 안쓰면 return은 자동으로 실행된다. 함수가 종료되었다는 뜻
+    // return {
+    //     name : "박인수",
+    //     age : 32
+    // }
+    return function(){
+        return "이렇게 자주 쓰인다.";
+    }
+}
+
+console.log(f_ret()()); // ()를 붙여주면 함수안에 함수도 실행 가능
+
+
+
+const f_ck = function(p_arg){
+    console.log("넘어온 값 : " + p_arg()); // 함수를 부른 자리에는 return값이 찍힌다.
+}
+
+// javascript는 타입을 미리 정하지 않는다. 그렇기에 들어오는 값에 맞춰서 타입이 정해진다.
+// f_ck("박인수");
+// f_ck(123);
+// f_ck([1,2,3]); // 자동으로 toString()이 실행되서 안에 값을 출력한다.
+// f_ck({name : "전혜수", age : 31}); // toString()되면 type Obejct가 출력된다.
+
+
+// 함수 안에 함수를 넣는걸 callbacl(뒤에 부른다) 함수라고 한다.
+f_ck(function(){ // 함수를 넘기면 함수 코드가 그대로 찍힌다.
+    return console.log("함수도 파라미터에 담는다.");
+});
+
+// 아래 이거랑 같은 뜻이다. 여기서 괄호를 붙이면 함수가 실행되겠지??
+// p_arg = function(){
+//     console.log("함수도 파라미터에 담는다.")
+// }
+
+
+
+////////////////////////////////////////////////////////////////////////////////////
+// 눈만 잘 따라가면 함수는 어렵지 않다. (어렵다고 하면 연습이 부족)
+
+
+console.log(agu(4,1));
+// console.log(calculator('-')(1,3));
+function agu(b,c){
+    return calculator(('+')(b,c));
+}
+
+function calculator(p_op){
+    if(p_op == '+'){
+        return function(p1,p2){
+            return p1+p2;
+        }
+    }
+    
+    if(p_op == '-'){
+        return function(p1,p2){
+            return p1-p2;
+        }
+    }
+    
+    if(p_op == 'x'){
+        return function(p1,p2){
+            return p1*p2;
+        }
+    }
+    
+    if(p_op == '/'){
+        return function(p1,p2){
+            return p1/p2;
+        }
+    }
+}
+
+
+</script>

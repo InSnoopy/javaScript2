@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<body>
+    <!-- 주의 : form태그 안에 form태그 있으면 안됨! -->
+    <form action="">
+        <input type="text" name="aaa1" value="a1"><br>
+        <input type="text" name="aaa2" value="a2"><br>
+        <input type="text" name="aaa3" value="a3"><br>
+        <textarea name="aaa5" cols="30" rows="10">멀티라인 글</textarea>
+        <div name="huk">메롱</div>
+        <input type="text" name="aaa4" value="a4"><br>
+    </form>
+    <form action="">
+        <input type="text" name="bbb1" value="b1"><br>
+        <input type="text" name="bbb2" value="b2"><br>
+        <input type="text" name="bbb3" value="b3"><br>
+        <input type="text" name="bbb4" value="b4"><br>
+    </form>
+</body>
+<script>
+
+    let myArr = {}; // 이거랑 배열이랑 잘 구분하자. : 배열같이 생겼지만 객체의 속셩명이 정의던 것이다.
+    myArr["0"] = "R"; // 변수명은 숫자로 시작할 수 없다. ( 특수문자는 $,_만 사용 가능 ) // 이럴 때 배열식 접근법 사용
+    myArr["1"] = "O"; // .접근법으로는 안되나 []접근법으로는 가능
+    myArr[2] = "Z";
+    myArr[3] = "E";
+
+    console.log(myArr);
+    console.log(myArr["0"]);
+
+
+
+
+    // forms를 사용하면 form태그 안에 있는 것들이 배열로 자동으로 생성된다.
+    // console.log(document.forms); // forms에 자동으로 form객체가 유사배열로 담김
+    // console.log(document.forms[1]);
+    // console.log(document.forms[1][1]);
+    // console.log(document.forms[0].elements); // 자동으로 사용자 입력태그 객체를 elements에 담아줌
+    // elements : 사용자 입력 태그만 담긴다. ( input, textarea.. )
+
+    // const form0Elems = document.forms[0].elements;
+    // for(let i=0; i<form0Elems.length; i++){
+    //     console.log( form0Elems[i].name, "=" ,form0Elems[i].value )
+    // }
+    
+    // const elems = document.forms[0].elements;
+    // for(let i=0; i<elems.length; i++){
+    //     // console.log( elems["aaa1"].name, "=" ,elems["aaa1"].value );
+    //     console.log( elems["aaa"+(i+1)].name, "=" ,elems["aaa"+(i+1)].value );
+    // }
+    
+    // console.log("insoo",document.forms[0].elements[1]);
+
+
+
+
+// JSON( JavaScript Obejct Notation ) 자바스크립트 객체 표기법 (엄청 중요!)
+// json은 현재 웹에서( 데이터 전송 포맷 )뿐만 아니라 사방( 설정 파일, 객체지향DB[저장 포맷] )에서 사용됨
+// 배열도 JSON의 한가지 형태로 받아들이는게 정신 건강에 좋음
+// 배열식 접근법을 꼭 이해를 해야한다.
+
+// let simple = {}; // 빈 객체 선언
+// // simple.name = "전혜수" ; // 속성 추가
+// simple["name"] = "안전혜수"; // 배열식 접근법으로 속성 추가
+//     // 1번, 2번 방법의 차이는 속도다. 1번 > 2번
+//     // 2번으로 꼭 사용할 상황이 자주 발생한다.
+//     // 3번 : 변수로 지정해서 그 값을 배열식 접근법에 추가한다.
+//     let ppp = "huk";
+//     simple[ppp] = "안전혜수";
+//     console.log(simple.huk);
+
+
+
+
+// let name = "fbi";
+
+// let simple = { // new Obejct() 와 같은 표기법
+    // name : "전혜수" // 객체의 속성은 문자열로 처리된다. -> "name":"전혜수" 
+    // [name]:"전혜수" // 객체 속성을 변수로 지정하려면 배열식 접근법을 사용한다.
+// }
+
+// console.log(simple.fbi); 
+// console.log(simple.name);
+</script>
+    

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script>
+
+    ///////////////////////////////////////////////
+    // 결국 만들어진 함수들도 다 이렇게 만들어 졌다.
+    
+    function MyArray(){
+        this.length = 0;
+    }
+
+    MyArray.prototype.push = function(p_val){
+        this[this.length] = p_val;
+        this.length++;
+    }
+
+    // 여기서 callback 한번 더 체크
+    // 익숙해지면 편하다 (jQuery가 모두 이걸로 만들어져 있다.)
+    MyArray.prototype.forEach = function(p_cb){ // p_cb는 함수를 받아야 한다.
+        for(let i=0; i<this.length; i++){
+            p_cb(i, this[i]); // 함수 호출 : index랑 인덱스에 해당되는 값을 출력할 거야~
+        }
+    }
+
+    let arr1 = new MyArray();
+    for(let i=1; i<=100; i++){
+        arr1.push("안녕"+i);
+    }
+
+    console.log(arr1);
+
+    arr1.forEach(function(p_index, p_val){
+        console.log(p_index + " ===> " + p_val);
+    })
+
+</script>

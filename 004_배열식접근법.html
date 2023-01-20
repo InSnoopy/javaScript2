@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <div id="disp" style="border: 2px solid pink"></div>
+<script>
+    const members = [
+        {name:"양서연",pos:"lvl1"},
+        {name:"전혜수",pos:"lvl2"},
+        {name:"박인수",pos:"lvl3"},
+        {name:"김준일",pos:"lvl4"},
+        {name:"이수현",pos:"lvl2"}
+    ]
+
+    const position = {
+        "lvl1" : "사장님",
+        "lvl2" : "회장님",
+        "lvl3" : "고객님",
+        "lvl4" : "손님"
+    }
+
+    // const temp = document.createElement("div");
+    // const divbox = document.querySelector("#div");
+    // console.log(temp)
+    // let htmlCode = "";
+    // htmlCode += "<table border='1'>";
+    // htmlCode += "<th>순번</th>"
+    // htmlCode += "<th>이름</th>"
+    // htmlCode += "<th>직책</th>"
+    // htmlCode += "<tr>"+members[0][name]+"</tr>"
+    // htmlCode += "<tr>"+members[0][name]+"</tr>"
+    // htmlCode += "<tr>"+members[0][name]+"</tr>"
+    // htmlCode += "</table>";
+    // console.log(htmlCode);
+    // temp.innerHTML(htmlCode);
+    // divbox.append(temp);
+
+
+    // 테이블 문자열 더하기 (자주 사용됨), 이런 류를 템플릿(Template)이라고 부름
+    // 꼭 배열식 접근법을 잘 쓰길, 몇번 해보면 안 어려움
+
+    // 방법1) 일반 +로 사용하는 방법
+    // let tblStr = "<table border=2>";
+    // tblStr += "<tr><th>순번</th><th>이름</th><th>직책</th></tr>";
+    // for(let i=0; i < members.length; i++){
+    //     tblStr += "<tr>";
+    //     tblStr += "<td>" + (i+1) + "</td>";
+    //     tblStr += "<td>" + members[i].name + "</td>";
+    //     tblStr += "<td>" + position[members[i].pos] + "</td>";
+    //     tblStr += "</td>";
+    // }
+    // tblStr += "</table>";
+    // disp.innerHTML = tblStr;
+
+    // 방법2) `으로 사용하는 방법
+    let tblStr = "<table border=2>";
+    tblStr += "<tr><th>순번</th><th>이름</th><th>직책</th></tr>";
+    for(let i=0; i < members.length; i++){
+        tblStr += `
+                <tr>
+                    <td>${(i+1)}</td>
+                    <td>${members[i].name}</td>
+                    <td>${position[members[i].pos]}</td>
+                </td>`;
+    }
+    tblStr += "</table>";
+    disp.innerHTML = tblStr;
+
+</script>
+</body>
+</html>

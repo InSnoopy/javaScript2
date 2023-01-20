@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<body>
+    <!-- 그냥 mybutton속성 이름을 쓰고 선택자에서 대괄호 붙이면 속성을 가져오는 방식으로 쓰는 경우 있다. -->
+    <input type="button" mybutton value="버튼"> 
+</body>
+
+<script>
+
+
+/*
+    // 여러가지 선택 방법
+    // const mButton = document.querySelector("input[type=button][value=버튼]"); // input 속성중에 type이 button, value가 "버튼"인 걸 선택
+    // const mButton = document.querySelector("input[type]"); // input 속성중에 type 속성이 있는 것
+    const mButton = document.querySelector("[mybutton]"); // 내가 속성을 하나 만들어서 그 속성을 가져오는 방법 (요즘 이것도 사용함)
+    function f_ck(p_arg1){
+        alert("절 눌렀나요?" + p_arg1);
+    }
+    mButton.addEventListener("click", f_ck.bind(document,"박인수")); // 여기서 bind가 아닌 call을 실행하면 버튼을 누르지 않아도 바로 실행되기 때문에 안된다.
+    // mButton.addEventListener("click", f_ck); // f_ck()에서 ()를 붙이면 버튼을 클릭하지 않아도 바로 실행된다.
+                                             // 매개 변수를 넘길 수 없기 때문에 이 때 사용하는 방법이 bind이다.
+                                             // 함수 이름을 -> FP(Funciont Pointer)
+    // bind는 내부적으로 함수를 복사해서 매개변수를 넣는 함수포인터를 되돌려준다.
+    // call과 문법이 같으나 햇갈리면 안된다.
+    // 쉽게 call은 함수를 실행시켜주고, bind는 함수 포인터를 리턴(아직 실행안됨)해준다고 생각하면 된다.
+*/
+
+
+
+
+    // 정리하면 전역 변수 선언은 Window객체의 속성으로 선언하는 것과 같고
+    //              함수 선언은 Window객체의 메소드를 선언하는 것과 같다.
+    // 함수 지향 언어 같지만, 알고보면 객체 지향 언어이다.
+
+
+    
+    
+
+    
+/*
+    function f_ck(){ 
+        console.log(this); 
+    }
+    
+    let anotherObj = {name:"박인수"}; // 객체 1개 생성
+    anotherObj.method1 = f_ck;       // 객체의 method1이 f_ck를 참조
+    anotherObj.method1();            // f_ck 호출 여기서 this값은 anotherObj로 찍힌다.
+    // 상황에 따라서 this값이 바뀐다.method1은 anotherObj에 속해 있기 때문에 anotherObj로 this로 찍힌다.
+    // Script 개발자 커뮤니티에서 항의, this 거지 같다라고.. 머리 아프다.. 니가 해봐라~
+    // 그래서 만들어진게 3가지가 나왔다. [ call, apply, bind(현재는 엄청 중요!), this를 제어 ]
+*/
+
+
+/*
+    function f_ck(){ 
+        console.log(this); 
+    }
+    
+    // call 이걸로 this 강제 셋팅 가능
+    f_ck.call({name:"박인수"}); 
+    f_ck.call({name:"전혜수",age:31});
+    f_ck.call(document);
+    
+    // 단점 : 매개 변수가 있다면
+    function f_ck2(p_arg1, p_arg2){ 
+        console.log(this); 
+        console.log(p_arg1, "    ", p_arg2);
+    }
+    // 첫번째는 무조건 this를 가리킨다.
+    f_ck2.call({name:"박인수"}, "매개변수1", "매개변수2"); 
+    f_ck2.call({name:"전혜수",age:31}, "매개변수 1개만"); // 2번째 매개변수는 없기에 값이 없다.
+    f_ck2.call(document, "aaa", "bbb"); 
+*/
+
+
+
+/*
+    function f_ck3(p_arg1, p_arg2){ 
+        console.log(this); 
+        console.log(p_arg1, "    ", p_arg2);
+    }
+    // apply는 call과 사용법이 똑같다. 단지 매개변수들을 배열에 담아서 한번에 줘야 한다.
+    f_ck3.apply({name:"박인수"}, ["매개변수1", "매개변수2"]); 
+*/
+
+
+
+
+
+
+
+/*
+    // this (이것, 나) 햇갈린다.
+    function f_ck(){ // 함수로 만들었지만, 실제로는 Window객체의 메소드를 만든 것임.
+        console.log(this); // 메소드를 가진 Window라는 객체를 가리킨다. (this)는..
+    }
+    // f_ck(); // Window 객체가 찍힌다. 그 이유는? 함수 부르는거 앞에 Window.f_ck()가 생략되어 있다.
+
+
+    // 전역 객체 또한 선언을 하면 Window객체의 속성으로 선언되는 것과 같다.
+    var merong = "메롱";
+    console.log(window.merong); // 메롱이 나온다.
+*/
+
+</script>
+    

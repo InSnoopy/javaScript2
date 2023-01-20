@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<body>
+
+</body>
+<script>
+    // 변수 선언 var, let, const의 차이 ( let과 const는 es6부터 지원 )
+    // 그동안 마이크로소프트의 IE11에 묶여 못 쓰고 있었음
+
+    // let : 영역은 { }으로 결정됨, scope가 다른 언어들과 같음 
+    // var : function 키워드에 의해서 결정됨, scope가 아주 틀별함
+
+
+    // - let
+    // function f_ck(){
+    //     var aaa = "10";
+    //     console.log(aaa);
+    // }
+    // console.log(aaa); // error
+
+
+    // - var
+    // for(var i=1; i<10; i++){} // 10
+    // for(let i=1; i<10; i++){}
+    // console.log("체크",i); // 
+
+
+    // - const
+    // const를 쓰는 경우 :
+        // 보통 함수(function)나, HTML 페이지 내에서 항상 있는 element
+        const myBody = document.querySelector("body");
+        const print = function(){
+            console.log("메롱");
+        }
+
+    // 원시 타입 변경 불가
+    // 객체 타입 속성은 변경 가능
+    // 객체 타입 자체는 변경 불가
+        // 객체 ( 속성, 메소드 )
+            // 객체는 ( 컨테이너 )는 박스는 변경이 안되지만
+            // 객체 안에 속성은 박스 안에 내용물은 변경이 가능하다.
+
+    // const fbi="에프비아이";
+    // fbi="케이지비"; // error
+
+    // const kgb = ["메롱"];
+    // kgb[1] = "메롱1";
+    // console.log(kgb);
+
+    // const oneMore = {name : "찬영"} // let oneMore은 객체 자체를 변경 가능. const와 let의 차이
+    // oneMore.name = "안찬일";
+    // console.log(oneMore); // "안찬영"
+    
+    // oneMore = {name : "박인수"}
+    // console.log(oneMore); // error
+
+</script>
+    
