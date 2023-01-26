@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script>
+
+    // 아작스 일반화 ( DAY 원칙, Do not Repeat Yourself )
+    // 반복되는 코드 = 멋진 말로 boilder pate 코드라고 부른다. ( 사용하려면 기본적으로 아래 코드가 다 들어가야 한다. )
+/*
+    let xhr = new XMLHttpRequest();
+    xhr.open("","",true);
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState == 4 && xhr.status == 200){
+            console.log(xhr.responseText);
+            // 통신 성공 했을 때 실행해야 할 코드
+        }
+    }
+    xhr.send();
+*/
+
+
+
+    // 1. 눈에 보이는 대로 일반화, 매개변수 3개
+/*
+    function ajax(p_method, p_url, p_code){
+        let xhr = new XMLHttpRequest();
+        xhr.open(p_method,p_url,true);
+        xhr.onreadystatechange = function(){
+            if(xhr.readyState == 4 && xhr.status == 200){
+                console.log(xhr.responseText);
+                // 통신 성공 했을 때 실행해야 할 코드
+                // 함수 안에서 함수를 부르는 걸 콜백 함수라고 부른다. ( 첫번째 함수가 불려야지 그 뒤에 함수가 불리기 때문 )
+                p_code(xhr.responseText); // 함수에 결과를 넘긴다.
+            }
+        }
+        xhr.send();
+    }
+
+    ajax("get","./data.csv",function(rslt){
+        console.log("메롱1"+rslt);
+    });
+    ajax("get","./data.json",function(rslt){
+        console.log("메롱2"+rslt);
+    });
+    ajax("get","./data.xml",function(rslt){
+        console.log("메롱3"+rslt);
+    });
+*/
+
+
+    // 2. 매개변수를 1개로 묶음변수(json)로 보내는게 유행
+/*    
+    function ajax(p_setting){ // p_setting은 json으로 보낼것임 ( 왜? 여러개 담을 거라서 )
+        let xhr = new XMLHttpRequest();
+        xhr.open(p_setting.method,p_setting.url,true);
+        xhr.onreadystatechange = function(){
+            if(xhr.readyState == 4 && xhr.status == 200){
+                p_setting.success(xhr.responseText); // 함수에 결과를 넘긴다.
+            }
+        }
+        xhr.send();
+    }
+
+    ajax({
+        method:"get",
+        url:"data.csv",
+        success:function(p_rslt){
+            console.log(p_rslt.split("\n")[2]);
+        }
+    })
+*/
+
+
+    // 3. jQuery 형태로 만들어보기
+    // 네임스페이스 변수, 보통 빈 객체(빈 객체 아니여도 상관없음)를 많이 사용
+    let $ = {}; // 변수명으로 쓸 수 있는 특수 문자 2개 [ $, _ ]
+
+    // $.ajax라는 함수를 선언
+    $.ajax = function(p_setting){ 
+        let xhr = new XMLHttpRequest();
+        xhr.open(p_setting.method,p_setting.url,true);
+        xhr.onreadystatechange = function(){
+            if(xhr.readyState == 4 && xhr.status == 200){
+                if(p_setting.dataType=="json"){
+                    p_setting.success(JSON.parse(xhr.responseText));
+                    return;
+                }
+                p_setting.success(xhr.responseText);
+            }
+        }
+        xhr.send();
+    }
+
+    // 위에 $.ajax라는 함수를 실행하면서 매개변수를 넣고 있다.
+    $.ajax({
+        method:"get",
+        url:"data.json",
+        dataType:"json", // 서버쪽에서 오는건 항상 문자열일 뿐이고 클라이언트 쪽에서 스크립트가 변경하는 것이다.
+        success:function(p_rslt){
+            console.log(p_rslt);
+        }
+    })
+
+</script>

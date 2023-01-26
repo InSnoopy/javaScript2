@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<body>
+    <div id="disp"></div>
+    <input type="button" value="AjaxCall1" onclick="f_ajax1()">
+    <input type="button" value="AjaxCall2" onclick="f_ajax2()">
+    <input type="button" value="AjaxCall3" onclick="f_ajax3()">
+</body>
+<script>
+
+    let xhr = new XMLHttpRequest();
+    xhr.open("get","data.csv",true); // 세번째 매개변수 true/false로 비동기/동기
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState == 4 && xhr.status == 200){
+            alert(xhr.responseText);
+        }
+    }
+    xhr.send();
+    alert("전 언제 뜨나요?"); // 이친구가 먼저 뜬다. 위에는 비동기니깐 위에 코드가 실행되고 끝나고 말고 신경안쓰고 이걸 쓴다.
+                             // 만약 위에걸 먼저 뜨고 싶다면 false( 동기 )로 변경하면 된다.
+
+
+    // 주의 JSON 유틸리티가 조금 불량
+    // let myObj = "{'name':'김서빈'}"; // error : 이렇게 쓰지 말자
+    let myObj = '{"name":"김서빈"}'; // 자바스크립트 문법에 맞는 문자열 밖에가 '' 안에다 ""로 해야한다.
+    console.log(JSON.parse(myObj)); // 객체로 변환
+
+/*
+    // Ajax(아작스, 에이잭스) 말이 필요 없음, 웹개발에겐 밥줄!
+    // Ajax는 처음에 아무도 안 믿음(비동기에 대한 신뢰가 부족)
+    // 2000년 초반에 비동기 Ajax 등장(form 태그의 비효율성)
+
+    // Ajax 원본 ( 손가락이 외워야한다. )
+    // 이 당시에는 XML이 많이 했기에 XML이라 붙었다. 지금은 JSON을 많이 쓴다.
+    let xhr = new XMLHttpRequest(); // 심부름꾼 아저씨 생성 ( 나 대신 통신해준다. )
+    xhr.open("get","./data.csv",true); // 심부름 시킬 내용 지정 ( "메소드","URL","비동기여부" )
+    xhr.onreadystatechange = function (){ // 심부름꾼 아저씨 이벤트 발생 (연락,진행여부)
+        // 모든 상태(데이터 보내는중.. 받는중 등등)에 관심이 있는 건 아니고, 이기적인 나는 끝난 것만 관심.
+        // 서버 코드도 확인 ( 심부름꾼 아저씨한테 서버 상태코드도 가지고 오게했다. - 아저씨 못믿음 )
+        if(xhr.readyState == 4 && xhr.status == 200){ // 나 일 다 했다는 뜻!
+            console.log(xhr.responseText); // 서버에서 받아온 결과는 responseText에 담아온다.
+        }
+    }
+    xhr.send(); // 시킨 일 하세요라는 명령 : 보통 send를 onreadstatechange 뒤에다가 쓴다.
+    // 실행하고 이벤트 등록하면 이벤트를 놓칠수도 있어서, 이벤트 등록하고, 실행하는 순서로..
+*/
+
+    const disp = document.querySelector("#disp");
+    // csv 파일
+    function f_ajax1(){
+        let xhr = new XMLHttpRequest(); // 전역변수로 쓰면 안된다. 지역변수로 써야 다른 비동기 함수가 시킨 일과 충돌나지 않음.
+        xhr.open("get","./data.csv",true);
+        xhr.onreadystatechange = function(){
+            if(xhr.readyState == 4 && xhr.status == 200){
+                console.log(xhr.responseText);
+                var content = xhr.responseText;
+                content = content.split('\n');
+                console.log(content);
+                let tblStr = "<table border=2>";
+                tblStr += "<tr><th>이름</th><th>나이</th><th>별명</th></tr>";
+                for(let i=1; i < content.length; i++){
+                    let tds = content[i].split(",");
+                    tblStr += `
+                            <tr>                          
+                                <td>${tds[0]}</td>
+                                <td>${tds[1]}</td>
+                                <td>${tds[2]}</td>
+                            </td>`;
+                }
+                tblStr += "</table>";
+                disp.innerHTML = tblStr;
+            }
+        }
+        xhr.send();
+    }
+
+    // json 파일
+    function f_ajax2(){
+        let xhr = new XMLHttpRequest();
+        xhr.open("get","./data.json",true);
+        xhr.onreadystatechange = function(){
+            if(xhr.readyState == 4 && xhr.status == 200){
+                let content = JSON.parse(xhr.responseText)
+                console.log(content);
+
+                let tblStr = "<table border=2>";
+                tblStr += "<tr><th>이름</th><th>나이</th><th>별명</th></tr>";
+                for(let i=0; i<content.length; i++){
+                    tblStr += `
+                        <tr>                          
+                            <td>${content[i].name}</td>
+                            <td>${content[i].age}</td>
+                            <td>${content[i].alias}</td>
+                        </td>`;
+                }
+                tblStr += "</table>";
+                disp.innerHTML = tblStr;
+            }
+        }
+        xhr.send();
+    }
+
+    // xml 파일
+    function f_ajax3(){
+        let xhr = new XMLHttpRequest();
+        xhr.open("get","./data.xml",true);
+        xhr.onreadystatechange = function(){
+            if(xhr.readyState == 4 && xhr.status == 200){
+                console.log(xhr.responseXML); // DOM 객체로 받는다.
+                let myDoc = xhr.responseXML;
+                let friends = myDoc.getElementsByTagName("friend");
+                console.log(friends[0].querySelector("name").innerHTML);
+                console.log(friends[0].children[0]);
+                let tblStr = "<table border=2>";
+                tblStr += "<tr><th>이름</th><th>나이</th><th>별명</th></tr>";
+                for(let i=0; i<friends.length; i++){
+                    tblStr += `
+                        <tr>
+                            <td>${friends[i].children[0].innerHTML}</td>
+                            <td>${friends[i].children[1].innerHTML}</td>
+                            <td>${friends[i].children[2].innerHTML}</td>
+                        </td>`;
+                }
+                tblStr += "</table>";
+                disp.innerHTML = tblStr;
+            }
+        }
+        xhr.send();
+    }
+
+</script>

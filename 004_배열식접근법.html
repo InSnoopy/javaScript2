@@ -60,11 +60,11 @@
     tblStr += "<tr><th>순번</th><th>이름</th><th>직책</th></tr>";
     for(let i=0; i < members.length; i++){
         tblStr += `
-                <tr>
-                    <td>${(i+1)}</td>
-                    <td>${members[i].name}</td>
-                    <td>${position[members[i].pos]}</td>
-                </td>`;
+            <tr>
+                <td>${(i+1)}</td>
+                <td>${members[i].name}</td>
+                <td>${position[members[i].pos]}</td>
+            </td>`;
     }
     tblStr += "</table>";
     disp.innerHTML = tblStr;
