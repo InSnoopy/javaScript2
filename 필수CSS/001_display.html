@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+    #disp{
+        border:1px solid black;
+    }
+    .aaa{
+        border:1px solid pink;
+        display:inline-block;
+        width:100px; height: 100px;
+    }
+</style>
+</head>
+<body>
+    <!-- display none, block, inline-block 기억 -->
+    <div id="disp">
+        <div class="aaa">로제</div>
+        <!-- 있지만 공간도 차지하지 않고 눈에도 안보임-->
+        <div class="aaa" style="display:none">제니</div>
+        <!-- 공간은 차지하지만 눈에는 안보임 -->
+        <div class="aaa" style="visibility: hidden;">리사</div>
+        <div class="aaa">서빈</div>
+    </div>
+</body>
+</html>

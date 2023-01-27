@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+    #disp{
+        /* static = 브라우저가 알아서 그려라 : position 기본값 */
+        /* position: static; */
+
+        /* relative = static으로 만든 다음에 그 기준점을 기준으로 음직임 */
+        /* position: relative; */
+
+        /* absolute = 브라우저 왼쪽 모서리 기준으로 움직임*/
+        /* position: absolute; */
+        left:10px;
+        top:10px;
+        border:1px solid black;
+    }
+    .aaa{
+        border:1px solid pink;
+        display:inline-block;
+        width:100px; height: 100px;
+    }
+    #risa{
+        /* position: absolute; */
+        /* position: relative; */
+        left:100px;
+        top:100px;
+        background-color: green;
+    }
+    #banner{
+        font-size: 2em;
+        background-color: black;
+        color:yellow;
+        position:fixed; /* 고정 */
+        left:0;
+        top:0;
+    }
+
+</style>
+</head>
+<body>
+    <div id="banner">최경수팀장님 만만세</div>
+    <div id="disp">
+        <div class="aaa">로제</div>
+        <div class="aaa">제니</div>
+        <div class="aaa" id="risa">리사</div>
+        <div class="aaa">서빈</div>
+    </div>
+    <div id="disp">
+        <div class="aaa">로제</div>
+        <div class="aaa">제니</div>
+        <div class="aaa" id="risa">리사</div>
+        <div class="aaa">서빈</div>
+    </div>
+    <div id="disp">
+        <div class="aaa">로제</div>
+        <div class="aaa">제니</div>
+        <div class="aaa" id="risa">리사</div>
+        <div class="aaa">서빈</div>
+    </div>
+    <div id="disp">
+        <div class="aaa">로제</div>
+        <div class="aaa">제니</div>
+        <div class="aaa" id="risa">리사</div>
+        <div class="aaa">서빈</div>
+    </div>
+    <div id="disp">
+        <div class="aaa">로제</div>
+        <div class="aaa">제니</div>
+        <div class="aaa" id="risa">리사</div>
+        <div class="aaa">서빈</div>
+    </div>
+    <div id="disp">
+        <div class="aaa">로제</div>
+        <div class="aaa">제니</div>
+        <div class="aaa" id="risa">리사</div>
+        <div class="aaa">서빈</div>
+    </div>
+    <div id="disp">
+        <div class="aaa">로제</div>
+        <div class="aaa">제니</div>
+        <div class="aaa" id="risa">리사</div>
+        <div class="aaa">서빈</div>
+    </div>
+    <div id="disp">
+        <div class="aaa">로제</div>
+        <div class="aaa">제니</div>
+        <div class="aaa" id="risa">리사</div>
+        <div class="aaa">서빈</div>
+    </div>
+    <div id="disp">
+        <div class="aaa">로제</div>
+        <div class="aaa">제니</div>
+        <div class="aaa" id="risa">리사</div>
+        <div class="aaa">서빈</div>
+    </div>
+    <div id="disp">
+        <div class="aaa">로제</div>
+        <div class="aaa">제니</div>
+        <div class="aaa" id="risa">리사</div>
+        <div class="aaa">서빈</div>
+    </div>
+<script>
+/*
+    const disp = document.querySelector("#disp");
+    disp.style.left = "300px";
+    disp.style["top"] = "400px";
+*/
+</script>
+</body>
+</html>

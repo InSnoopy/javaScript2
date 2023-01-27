@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    
+<!-- 
+    https://www.flickr.com/services/feeds/photos_public.gne?tags=cat&format=json
+
+    위에 주소를 들어가보면 자바스크립트의 함수 호출 모습(매개변수는 JSON타입)
+    jsonFlickrFeed({
+            ..어쩌구 저쩌구 내용
+    });
+-->
+
+<script>
+    function jsonFlickrFeed(p_data){
+        // console.log(p_data); // 들어오는 데이터 확인
+        // console.log(p_data.items[1].media.m);
+
+        // 검색한 것만 보기 위해서 초기화
+        disp.innerHTML = "";
+
+        let imgs = p_data.items;
+        for(let i=0; i<imgs.length; i++){
+            console.log(imgs[i].media.m);
+            // 이미지 만들기
+            let img = document.createElement("img"); // 메모리에 img 태그 생성
+            img.src = imgs[i].media.m;
+            // 문서( document )에 넣어야 눈에 보임
+            disp.appendChild(img);
+        }
+    }   
+</script>
+
+</head>
+<body>
+    <h1>JSONP (JSON Padding)에 대해 알아보자</h1>
+    <img src="https://robohash.org/%EB%B0%95%EC%9D%B8%EC%88%98">
+    <input text="text" id="schText" value="">
+    <input type="button" value="검색" id="schBtn"><hr>
+    <div id="disp"></div>
+<script>
+
+    const disp = document.querySelector("#disp");
+    const schText = document.querySelector("#schText");
+    const schBtn = document.querySelector("#schBtn");
+
+    const preUrl = "https://www.flickr.com/services/feeds/photos_public.gne?tags=";
+    const postUrl = "&format=json";
+    schBtn.onclick = () => {
+        let schUrl = preUrl + schText.value + postUrl;
+        // 실제 요청은 script src로 해야된다. script 태그를 만들어야 한다.
+        let script = document.createElement("script");
+        script.src = schUrl;
+        // 계속 script태그가 생성된다. 이거 전에 remove로 전에 있던 script를 지우는 방법 숙제!
+        document.head.appendChild(script);
+    }
+
+</script>
+<!-- flickr사이트에서 가져온 주소 -->
+<!-- script src는 cross-origin에 상관 없다. (css도 마찬가지) 
+    JSON는 CORS(Cross-Origin-Resource-Sharing) 정책 회피방법 중 1개
+-->
+<script src="https://www.flickr.com/services/feeds/photos_public.gne?tags=cat&format=json"></script>
+
+<script>
+    // 기본적으로 cross-origin 아작스 요청은 보통 막혀있음 ( 서버 관리자가 풀어주지 않는 이상 )
+/*
+    let xhr = new XMLHttpRequest();
+    xhr.open("get","https://www.flickr.com/services/feeds/photos_public.gne?tags=cat&format=json", true);
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState == 4 && xhr.status == 200){
+            console.log(xhr.responseText);
+        }
+    }
+    xhr.send();
+*/
+</script>
+</body>
+</html>
